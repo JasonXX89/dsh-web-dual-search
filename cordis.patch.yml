@@ -1,0 +1,41 @@
+# Bundle patch for `dsh-web-dual-search`.
+#
+# Two jobs: insert the plugin's own row, and point the web seam at it.
+#
+# The selection override below matches the web row by `id` alone, with no
+# `name`. That is deliberate. In the patch format a `name` field *asserts*
+# the target's existing plugin name — it does not rename anything — so writing
+# the official web package's scoped name in a third-party bundle claims that
+# identity, which a patch-safety check reads as impersonation. `name` is
+# optional, and a config override needs nothing but the id.
+#
+# The two provider ids are independent fields, so search can run through Tavily
+# while fetch runs through TinyFish, or the other way round. Set either field
+# to `tavily` or `tinyfish` to choose that backend; a backend with no
+# credential reports itself unavailable, so the other one is used instead.
+#
+# A host that wants a different arrangement overrides this in its own patch
+# layer, which applies later and therefore wins:
+#
+#   - id: web
+#     config:
+#       searchProvider: tinyfish
+#       fetchProvider: tavily
+#
+# `apiKey` is not set here — a secret belongs in the environment, the
+# credentials service, or the provider's own local store, never in a patch
+# file. Each backend reads its key from the harness credentials service under
+# the name in `apiKeyEnv`, from that environment variable, or from the
+# provider's own CLI store.
+- insert:
+    - id: dsh-web-dual-search
+      name: "dsh-web-dual-search"
+      config:
+        attempts: 2
+# Found by id; no `name`, so nothing here asserts another package's identity.
+# `config` replaces the target's wholesale rather than merging, and the web
+# seam's config is exactly these two fields, so nothing is lost.
+- id: web
+  config:
+    searchProvider: tavily
+    fetchProvider: tavily

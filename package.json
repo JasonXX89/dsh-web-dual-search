@@ -1,0 +1,61 @@
+{
+  "name": "dsh-web-dual-search",
+  "version": "0.1.0",
+  "description": "Tavily and TinyFish web search/fetch providers for the DeepSeek Harness web capability seam (ctx.web) — one plugin, two backends, selectable per operation.",
+  "keywords": [
+    "cordis",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "search",
+    "fetch",
+    "tavily",
+    "tinyfish",
+    "web-search",
+    "web-fetch"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonXX89/dsh-web-dual-search.git"
+  },
+  "homepage": "https://github.com/JasonXX89/dsh-web-dual-search#readme",
+  "bugs": "https://github.com/JasonXX89/dsh-web-dual-search/issues",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.19.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.1.0",
+    "@deepseek-ai/dsh-credentials": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-launch-environment": "0.2.2-rc.1",
+    "@deepseek-ai/dsh-web": "0.2.2-rc.1"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "node": ">=24",
+      "dsh": "^0.2.0-rc.1 || >=0.2.1-0 <0.3.0"
+    }
+  }
+}
