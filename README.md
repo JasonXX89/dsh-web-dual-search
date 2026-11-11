@@ -52,7 +52,11 @@ TinyFish 的字段名与接缝几乎对齐（`snippet`/`description`），直映
 
 ## 安装
 
-有 pnpm 时走正规途径：
+从 GitHub 安装：
+
+    dsh plugin --profile web add github:JasonXX89/dsh-web-dual-search
+
+或从本地源码安装：
 
     dsh plugin --profile web add ./dsh-web-dual-search
 
@@ -74,3 +78,7 @@ volatile，叶子字段各自 volatile 保证设置页可独立编辑。
 11 个用例，桩掉 `fetch`：断言每个后端实际发出的请求（URL/方法/鉴权头/请求体）
 与字段映射（snippet/summary/publishedAt/answer、失败页语义、非法 URL 丢弃、
 空结果重试、日期时区）。
+
+## 许可
+
+MIT
